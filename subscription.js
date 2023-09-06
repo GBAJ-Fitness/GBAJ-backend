@@ -13,3 +13,6 @@ const Schema = new mongoose.Schema({
 });
 
 const subscription = mongoose.model('subscription', Schema);
+
+
+module.exports = subscription;
