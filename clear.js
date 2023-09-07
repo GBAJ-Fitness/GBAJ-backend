@@ -7,3 +7,7 @@ async function clear() {
     try {
         await subscription.deleteMany({});
     } catch (err) {
+    } finally {
+        mongoose.disconnect();
+      }
+    }
