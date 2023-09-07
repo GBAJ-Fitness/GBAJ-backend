@@ -23,7 +23,7 @@ app.get('/', (request, response) => {
     response.send('Our Server is working');
 });
 
-app.delete('.subcriptions/:id', async (request, response) => {
+app.delete('./subcriptions:id', async (request, response) => {
     const id = request.params.id;
 
     try {
