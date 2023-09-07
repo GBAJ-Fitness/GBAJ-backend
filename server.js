@@ -3,27 +3,27 @@ require("dotenv").config();
 const express = require('express');
 const mongoose = require("mongoose");
 const cors = require("cors")
-const mongoDB = process.env.Database;
+const mongoDB = process.env.DATABASE;
 const PORT = process.env.PORT || 3002;
 const app = express();
 
 const subscription = require("./subscription");
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
 mongoose.set("strictQuery", false);
 
-// main().catch((err) => console.log(err));
-// async function main() {
-//     await mongoose.connect(mongoDB);
-// }
+main().catch((err) => console.log(err));
+async function main() {
+    await mongoose.connect();
+}
 
 app.get('/', (request, response) => {
     response.send('Our Server is working');
 });
 
-app.delete('./subcriptions:id', async (request, response) => {
+app.delete('/subscriptions/:id', async (request, response) => {
     const id = request.params.id;
 
     try {
@@ -35,12 +35,12 @@ app.delete('./subcriptions:id', async (request, response) => {
     }
 });
 
-app.put('.subcriptions/:id', async (request, response) => {
+app.put('/subscriptions/:id', async (request, response) => {
     try {
         const subId = request.params.id;
         const updatedSubscriptionData = request.body;
         const updatedSubscription = await subscription.findByIdAndUpdate(subId, updatedSubscriptionData, {
-            new: true, 
+            new: true,
         });
         if (!updatedSubscription) {
             response.status(404).json({ error: 'Member not found' });
