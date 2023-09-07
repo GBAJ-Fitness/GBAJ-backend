@@ -57,4 +57,3 @@ async function main() {
 }
 
 
-// const subscription = require("./subscription");
