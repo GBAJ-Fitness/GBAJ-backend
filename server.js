@@ -8,6 +8,9 @@ const PORT = process.env.PORT || 3002;
 const app = express();
 
 app.use(cors());
+app.use(bodyParser.json());
+
+mongoose.set("strictQuery", false);
 
 app.get('/', (request, response) => {
     response.send('Our Server is working');
@@ -16,3 +19,11 @@ app.get('/', (request, response) => {
 app.listen(3002, () => {
     console.log(`Starting my port on ${3002}`);
 });
+
+main().catch((err) => console.log(err));
+async function main() {
+    await mongoose.connect(mongoDB);
+}
+
+
+const subscription = require("./subscription");
