@@ -40,7 +40,7 @@ app.put('.subcriptions/:id', async (request, response) => {
         const subId = request.params.id;
         const updatedSubscriptionData = request.body;
         const updatedSubscription = await subscription.findByIdAndUpdate(subId, updatedSubscriptionData, {
-            new: true, // Return the update
+            new: true, 
         });
         if (!updatedSubscription) {
             response.status(404).json({ error: 'Member not found' });
