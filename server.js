@@ -3,8 +3,11 @@ require("dotenv").config();
 const express = require('express');
 const mongoose = require("mongoose");
 const cors = require("cors")
-
+const mongoDB = process.env.Database;
+const PORT = process.env.PORT || 3002;
 const app = express();
+
+app.use(cors());
 
 app.get('/', (request, response) => {
     response.send('Our Server is working');
