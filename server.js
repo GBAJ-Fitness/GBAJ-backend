@@ -4,13 +4,16 @@ const express = require('express');
 const mongoose = require("mongoose");
 const cors = require("cors")
 const mongoDB = process.env.Database;
+const bodyParser = require('body-parser')
 const PORT = process.env.PORT || 3002;
 const app = express();
 
 const subscription = require("./subscription");
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(bodyParser.json());  // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true }));  // for parsing application/x-www-form-urlencoded
+
 
 mongoose.set("strictQuery", false);
 
