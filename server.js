@@ -15,6 +15,8 @@ app.use(bodyParser.json());
 mongoose.set("strictQuery", false);
 
 main().catch((err) => console.log(err));
+async function main() {
+
 
 app.get('/', (request, response) => {
     response.send('Our Server is working');
