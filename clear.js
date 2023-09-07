@@ -6,3 +6,4 @@ require("dotenv").config();
 async function clear() {
     try {
         await subscription.deleteMany({});
+    } catch (err) {
