@@ -12,13 +12,19 @@ const subscription = require("./subscription");
 app.use(cors());
 app.use(express.json());
 
-mongoose.set("strictQuery", false);
+const url = process.env.MONGODB_URI;
+
+//Check with Robert Tomorrow 
 
 main().catch((err) => console.log(err));
 async function main() {
-    await mongoose.connect();
+    await mongoose.connect(url);
+    console.log('mongoose is connected');
 }
 
+// app.post('/subscriptions/', async (request, response) => {
+    
+// })
 app.get('/', (request, response) => {
     response.send('Our Server is working');
 });
