@@ -11,3 +11,5 @@ async function clear() {
         mongoose.disconnect();
       }
     }
+
+    clear();
