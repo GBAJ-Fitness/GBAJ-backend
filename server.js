@@ -8,6 +8,8 @@ const PORT = process.env.PORT || 3002;
 const app = express();
 
 app.use(cors());
+app.use(bodyParser.json());
+
 
 app.get('/', (request, response) => {
     response.send('Our Server is working');
