@@ -10,6 +10,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+mongoose.set("strictQuery", false);
 
 app.get('/', (request, response) => {
     response.send('Our Server is working');
