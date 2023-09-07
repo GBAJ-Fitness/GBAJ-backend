@@ -22,9 +22,18 @@ async function main() {
     console.log('mongoose is connected');
 }
 
-// app.post('/subscriptions/', async (request, response) => {
-    
-// })
+app.post('/subscriptions/', async (request, response) => {
+    try {
+        console.log(request.body);
+        const newSubscription = await subscription.create(request.body);
+        response.status(200).send(newSubscription);
+
+    } catch (error) {
+        console.error(error)
+        response.status(500).send('Error creating Subscription');
+    }
+});
+
 app.get('/', (request, response) => {
     response.send('Our Server is working');
 });
