@@ -7,6 +7,8 @@ const mongoDB = process.env.Database;
 const PORT = process.env.PORT || 3002;
 const app = express();
 
+const subscription = require("./subscription");
+
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -14,7 +16,36 @@ mongoose.set("strictQuery", false);
 
 app.get('/', (request, response) => {
     response.send('Our Server is working');
-}); 
+});
+
+app.delete('.subcriptions/:id', async (request, response) => {
+    const id = request.params.id;
+
+    try {
+        await subscription.findByIdAndDelete(id);
+        response.status(204).send('success');
+    } catch (error) {
+        console.error(error);
+        response.status(404).send(`Unable to delete subscription with id ${id}`)
+    }
+});
+
+app.put('.subcriptions/:id', async (request, response) => {
+    try {
+        const subId = request.params.id;
+        const updatedSubscriptionData = request.body;
+        const updatedSubscription = await subscription.findByIdAndUpdate(subId, updatedSubscriptionData, {
+            new: true, // Return the update
+        });
+        if (!updatedSubscription) {
+            response.status(404).json({ error: 'Member not found' });
+            return;
+        }
+        response.json(updatedSubscription);
+    } catch (err) {
+        response.status(500).json({ error: "Server Error" });
+    }
+});
 
 app.listen(3002, () => {
     console.log(`Starting my port on ${3002}`);
@@ -26,4 +57,4 @@ async function main() {
 }
 
 
-const subscription = require("./subscription");
+// const subscription = require("./subscription");
