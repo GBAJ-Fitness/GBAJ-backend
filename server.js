@@ -19,3 +19,6 @@ app.get('/', (request, response) => {
 app.listen(3002, () => {
     console.log(`Starting my port on ${3002}`);
 });
+
+main().catch((err) => console.log(err));
+async function main() {}
