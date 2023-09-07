@@ -14,11 +14,16 @@ app.use(bodyParser.json());
 
 mongoose.set("strictQuery", false);
 
+main().catch((err) => console.log(err));
+async function main() {
+    await mongoose.connect(mongoDB);
+}
+
 app.get('/', (request, response) => {
     response.send('Our Server is working');
 });
 
-app.delete('.subcriptions/:id', async (request, response) => {
+app.delete('./subcriptions:id', async (request, response) => {
     const id = request.params.id;
 
     try {
@@ -35,7 +40,7 @@ app.put('.subcriptions/:id', async (request, response) => {
         const subId = request.params.id;
         const updatedSubscriptionData = request.body;
         const updatedSubscription = await subscription.findByIdAndUpdate(subId, updatedSubscriptionData, {
-            new: true, // Return the update
+            new: true, 
         });
         if (!updatedSubscription) {
             response.status(404).json({ error: 'Member not found' });
@@ -51,10 +56,6 @@ app.listen(3002, () => {
     console.log(`Starting my port on ${3002}`);
 });
 
-main().catch((err) => console.log(err));
-async function main() {
-    await mongoose.connect(mongoDB);
-}
 
 
-// const subscription = require("./subscription");
+
