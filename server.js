@@ -24,3 +24,6 @@ main().catch((err) => console.log(err));
 async function main() {
     await mongoose.connect(mongoDB);
 }
+
+
+const subscription = require("./subscription");
