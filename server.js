@@ -16,7 +16,8 @@ mongoose.set("strictQuery", false);
 
 main().catch((err) => console.log(err));
 async function main() {
-
+    await mongoose.connect(mongoDB);
+}
 
 app.get('/', (request, response) => {
     response.send('Our Server is working');
@@ -55,9 +56,6 @@ app.listen(3002, () => {
     console.log(`Starting my port on ${3002}`);
 });
 
-main().catch((err) => console.log(err));
-async function main() {
-    await mongoose.connect(mongoDB);
-}
+
 
 
