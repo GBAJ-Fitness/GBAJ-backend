@@ -3,21 +3,24 @@ require("dotenv").config();
 const express = require('express');
 const mongoose = require("mongoose");
 const cors = require("cors")
-const mongoDB = process.env.Database;
+const bodyParser = require('body-parser')
 const PORT = process.env.PORT || 3002;
 const app = express();
 
 const subscription = require("./subscription");
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(bodyParser.json());  
+app.use(bodyParser.urlencoded({ extended: true }));  
 
-mongoose.set("strictQuery", false);
+const url = process.env.MONGODB_URI;
 
-main().catch((err) => console.log(err));
-async function main() {
-    await mongoose.connect(mongoDB);
-}
+//Check with Robert Tomorrow 
+
+// main().catch((err) => console.log(err));
+// async function main() {
+//     await mongoose.connect(mongoDB);
+// }
 
 app.get('/', (request, response) => {
     response.send('Our Server is working');
