@@ -19,7 +19,7 @@ const url = process.env.MONGODB_URI;
 
 // main().catch((err) => console.log(err));
 // async function main() {
-//     await mongoose.connect(mongoDB);
+//     await mongoose.connect(url);
 // }
 
 app.get('/', (request, response) => {
