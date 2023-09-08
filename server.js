@@ -15,10 +15,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const url = process.env.MONGODB_URI;
 
-main().catch((err) => console.log(err));
-async function main() {
-    await mongoose.connect(mongoDB);
-}
+//Check with Robert Tomorrow 
+
+// main().catch((err) => console.log(err));
+// async function main() {
+//     await mongoose.connect(mongoDB);
+// }
 
 app.get('/', (request, response) => {
     response.send('Our Server is working');
