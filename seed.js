@@ -19,5 +19,22 @@ async function main() {
   });
 
   console.log(s1);
+
+  await Subscription.create({
+    Title: "Nutrition",
+    Nutrition: "wholegrain breads and cereals, leafy green vegetables, fruit, lean meat, and low-fat dairy products ",
+    Days: "5"
+
+  });
+
+  console.log('Read Nutrition');
+
+  await Subscription.create({
+    Title: "Workout Day",
+    Nutrition: "Sirloin steak, Ground beef, Chicken breast, Salmon, Tilapia, Oatmeal, rice",
+    Days: "7"
+  });
+
+  console.log('Read Workout')
   await mongoose.disconnect()
 }
