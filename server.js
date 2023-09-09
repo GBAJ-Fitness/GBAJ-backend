@@ -3,30 +3,52 @@ require("dotenv").config();
 const express = require('express');
 const mongoose = require("mongoose");
 const cors = require("cors")
-const bodyParser = require('body-parser')
+const mongoDB = process.env.DATABASE;
 const PORT = process.env.PORT || 3002;
 const app = express();
 
 const subscription = require("./subscription");
 
 app.use(cors());
-app.use(bodyParser.json());  
-app.use(bodyParser.urlencoded({ extended: true }));  
+app.use(express.json());
 
 const url = process.env.MONGODB_URI;
 
 //Check with Robert Tomorrow 
 
-// main().catch((err) => console.log(err));
-// async function main() {
-//     await mongoose.connect(url);
-// }
+main().catch((err) => console.log(err));
+async function main() {
+    await mongoose.connect(url);
+    console.log('mongoose is connected');
+}
+
+app.post('/subscriptions', async (request, response) => {
+    try {
+        console.log(request.body);
+        const newSubscription = await subscription.create(request.body);
+        response.status(200).send(newSubscription);
+
+    } catch (error) {
+        console.error(error)
+        response.status(500).send('Error creating Subscription');
+    }
+});
 
 app.get('/', (request, response) => {
     response.send('Our Server is working');
 });
 
-app.delete('./subcriptions:id', async (request, response) => {
+app.get('/subscriptions', async (request, response) => {
+    try {
+        const plans = await subscription.find({});
+        response.status(200).send(plans);
+    } catch (error) {
+        console.error(error);
+        response.status(404).send(`error occured`);
+    }
+});
+
+app.delete('/subscriptions/:id', async (request, response) => {
     const id = request.params.id;
 
     try {
@@ -38,12 +60,12 @@ app.delete('./subcriptions:id', async (request, response) => {
     }
 });
 
-app.put('.subcriptions/:id', async (request, response) => {
+app.put('/subscriptions/:id', async (request, response) => {
     try {
         const subId = request.params.id;
         const updatedSubscriptionData = request.body;
         const updatedSubscription = await subscription.findByIdAndUpdate(subId, updatedSubscriptionData, {
-            new: true, 
+            new: true,
         });
         if (!updatedSubscription) {
             response.status(404).json({ error: 'Member not found' });
