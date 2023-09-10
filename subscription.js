@@ -1,13 +1,16 @@
 const mongoose = require("mongoose");
 
 const Schema = new mongoose.Schema({
-    Title: {
+    Name: {
         type: String, 
     },
     Nutrition: {
         type: String,
     }, 
     Days:{
+        type: String,
+    },
+    Email:{
         type: String,
     },
 });

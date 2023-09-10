@@ -12,27 +12,29 @@ async function main() {
   console.log('mongoose is connected');
 
   let s1 = await Subscription.create({
-    Title: "Subscription",
+    Name: "Subscription",
     Nutrition: "Banana",
-    Days: "3"
+    Days: "3",
+    Email: "Test@user.com"
 
   });
 
   console.log(s1);
 
   await Subscription.create({
-    Title: "Nutrition",
+    Name: "Nutrition",
     Nutrition: "wholegrain breads and cereals, leafy green vegetables, fruit, lean meat, and low-fat dairy products ",
-    Days: "5"
-
+    Days: "5",
+    Email:"Test@user.com"
   });
 
   console.log('Read Nutrition');
 
   await Subscription.create({
-    Title: "Workout Day",
+    Name: "Workout Day",
     Nutrition: "Sirloin steak, Ground beef, Chicken breast, Salmon, Tilapia, Oatmeal, rice",
-    Days: "7"
+    Days: "7",
+    Email:"Test@user.com"
   });
 
   console.log('Read Workout')

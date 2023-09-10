@@ -14,8 +14,6 @@ app.use(express.json());
 
 const url = process.env.MONGODB_URI;
 
-//Check with Robert Tomorrow 
-
 main().catch((err) => console.log(err));
 async function main() {
     await mongoose.connect(url);
